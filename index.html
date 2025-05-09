@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOZO TRUMP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* RESET & GLOBAL */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; background: #f0f2f5; color: #1a1a1a; font-family: 'Roboto', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo { font-size: 1.8rem; font-weight: 700; color: #001f3f; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li { cursor: pointer; font-weight: 500; color: #001f3f; transition: color 0.2s; }
+    nav ul li:hover { color: #FFD700; }
+
+    /* HERO */
+    .hero {
+      background: #002d72;
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin: 0 auto;
+      max-width: 1000px;
+    }
+    .polaroid {
+      background: #fff;
+      padding: 10px 10px 25px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      width: 250px;
+      flex-shrink: 0;
+    }
+    .polaroid img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .polaroid .caption {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #333;
+    }
+    .hero-content {
+      max-width: 600px;
+      text-align: left;
+    }
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: 0.1rem; }
+    .hero-content p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; }
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      background: #FFD700;
+      color: #001f3f;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      transition: transform 0.2s;
+    }
+    .btn-primary:hover { transform: scale(1.05); }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 3rem 2rem;
+    }
+    .stat {
+      flex: 1 1 200px;
+      background: #fff;
+      border: 1px solid #dde1e7;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .stat .value { font-size: 2rem; font-weight: 700; color: #001f3f; }
+    .stat .label { font-size: 0.85rem; color: #555; margin-top: 0.5rem; }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem;
+    }
+    .feature {
+      background: #fff;
+      border: 1px solid #dde1e7;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .feature:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .feature i { font-size: 2rem; margin-bottom: 1rem; color: #001f3f; }
+    .feature h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #001f3f; }
+    .feature p { font-size: 0.9rem; color: #555; }
+
+    /* LEADERBOARD */
+    .leaderboard { margin: 3rem 2rem; }
+    .leaderboard h2 { text-align: center; font-size: 2rem; color: #001f3f; margin-bottom: 1rem; }
+    .table-holder { overflow-x: auto; margin: 0 2rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 0.75rem 1rem; text-align: center; }
+    thead { background: #001f3f; color: #fff; }
+    tbody tr:nth-child(odd) { background: #f9fafb; }
+    tbody tr:hover { background: #eef1f5; }
+    .rank { width: 50px; }
+    .address { font-family: monospace; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* LP badge */
+    td.address.lp::after {
+      content: ' 💧';
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #fff;
+      color: #777;
+      border-top: 1px solid #dde1e7;
+      font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .polaroid { width: 60%; margin: 0 auto; }
+      .hero-content { max-width: 100%; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">BOZO TRUMP</div>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Token</li>
+        <li>Stats</li>
+        <li>Holders</li>
+        <li>Docs</li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="polaroid">
+        <img src="bozotrump.png" alt="Bozo Trump" />
+        <div class="caption">President of Memes</div>
+      </div>
+      <div class="hero-content">
+        <h1>BOZO TRUMP</h1>
+        <p>The flagship presidential memecoin on Solana.<br>Assume office, secure your tokens.</p>
+        <a href="#holders" class="btn-primary"><i class="fas fa-landmark"></i> View Holders</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="value" id="totalSupply">1,000,000,000</div>
+      <div class="label">Total BOZO Minted</div>
+    </div>
+    <div class="stat">
+      <div class="value" id="holdersCount">…</div>
+      <div class="label">Unique Wallets</div>
+    </div>
+    <div class="stat">
+      <div class="value" id="topClownsPct">…%</div>
+      <div class="label">Held by Top 5%</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature"><i class="fas fa-gavel"></i><h3>Executive Launch</h3><p>Issued by executive order—no delays.</p></div>
+    <div class="feature"><i class="fas fa-balance-scale"></i><h3>Zero Bureaucracy</h3><p>0% tax—transparent governance.</p></div>
+    <div class="feature"><i class="fa-solid fa-vault"></i><h3>Founder's Vault</h3><p>Funds reserved for strategic initiatives.</p></div>
+    <div class="feature"><i class="fas fa-chart-line"></i><h3>Real-Time Briefings</h3><p>Live metrics on holders & distribution.</p></div>
+    <div class="feature"><i class="fas fa-handshake"></i><h3>Cabinet Access</h3><p>Exclusive community for top holders.</p></div>
+    <div class="feature"><i class="fas fa-flag"></i><h3>State Gifts</h3><p>Airdrops for loyal constituents.</p></div>
+  </section>
+
+  <section class="leaderboard" id="holders">
+    <h2>🎖️ Top BOZO Holders 🎖️</h2>
+    <div class="table-holder">
+      <table>
+        <thead>
+          <tr><th class="rank">#</th><th>Address</th><th>Balance</th><th>% Supply</th></tr>
+        </thead>
+        <tbody id="lb">
+          <tr><td colspan="4">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Bozo Trump • Inaugurated on Solana • <a href="#">Terms</a> • <a href="#">Privacy</a>
+  </footer>
+
+  <script type="text/javascript" src="js/min.js">
+
+</body>
+</html>
